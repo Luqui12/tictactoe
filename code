@@ -1,0 +1,88 @@
+row="  | | \n"
+sep=" -----\n"
+
+def introduction():
+	"""Return how to play tictactoe"""
+	print(row+sep+row+sep+row)
+	print("this is a tictactoe table. Align three crosses or circles to win.\nevery turn you decid where to put your cross or circle by selecting a specific point of the table.")
+
+	row1=" 1|2|3\n"
+	row2=" 4|5|6\n"
+	row3=" 7|8|9\n"
+	print(row1+sep+row2+sep+row3)
+	
+	if (input("Ready to start? Type 'yes' to play: ").lower())=="yes":
+		return True
+	else:
+		return False	
+
+intr=introduction()
+
+def checkwin(x,y,z):
+	"""Return true if there's a win in the 3 rows of the table (3 rows as parameters)"""
+	if (x[1] == y[3] == z[5]!=" ") or (x[5] == y[3] == z[1]!=" ") or (x[1]==x[3]==x[5]!=" ") or (y[1]==y[3]==y[5]!=" ") or (z[1]==z[3]==z[5]!=" ") or (x[1]==y[1]==z[1]!=" ") or (x[3]==y[3]==z[3]!=" ") or (x[5]==y[5]==z[5]!=" ") :
+		return True
+	else:
+		return False
+	
+def replace(string,pos,char):
+	"""Enter the string, the position to modify and the new character. Return a modifed string"""
+	string=list(string)
+	string[pos]=char
+	string="".join(string)
+	return string
+
+def play():
+	"""Let the user play tictactoe"""
+	if intr==True:
+		pass
+	else:
+		return print("maybe next time")
+	
+	print("symbol X starts")
+	
+	X_turns=[1,3,5,7,9]
+	row1,row2,row3 = row,row,row
+	
+	turn = 1 #turn counter
+	on=True 
+		
+	while True:
+		if turn in X_turns:
+			sign='X'
+			turn+=1
+		else:
+			sign='O'
+			turn+=1
+		
+		print(sign,"turn.")
+		pick=int(input("Type a number from 1 to 9 to fill the table: "))
+		
+		if pick==1:
+			row1=replace(row1,1,sign)
+		elif pick==2:
+			row1=replace(row1,3,sign)
+		elif pick==3:
+			row1=replace(row1,5,sign)
+		elif pick==4:
+			row2=replace(row2,1,sign)
+		elif pick==5:
+			row2=replace(row2,3,sign)
+		elif pick==6:
+			row2=replace(row2,5,sign)
+		elif pick==7:
+			row3=replace(row3,1,sign)
+		elif pick==8:
+			row3=replace(row3,3,sign)
+		elif pick==9:
+			row3=replace(row3,5,sign)
+		else:
+			return print("Sorry, something went wrong")
+		
+		print(row1+sep+row2+sep+row3)
+	
+		if checkwin(row1,row2,row3):
+			return print(sign,"wins.")
+		elif turn==9 and checkwin(row1,row2,row3)==False:
+			return print("even")
+		
