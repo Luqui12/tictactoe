@@ -85,4 +85,4 @@ def play():
 			return print(sign,"wins.")
 		elif turn==9 and checkwin(row1,row2,row3)==False:
 			return print("even")
-		
+play()		
